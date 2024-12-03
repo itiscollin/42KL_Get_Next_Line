@@ -6,43 +6,11 @@
 /*   By: cdawai <cdawai@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:36:04 by cdawai            #+#    #+#             */
-/*   Updated: 2024/11/25 17:13:06 by cdawai           ###   ########.fr       */
+/*   Updated: 2024/12/03 16:12:53 by cdawai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-// void	*ft_calloc(size_t count, size_t size)
-// {
-// 	void	*pointer;
-// 	size_t	total_size;
-
-// 	if (count == 0 || size == 0)
-// 		return (malloc(1));
-// 	total_size = count * size;
-// 	if (total_size == 0 || total_size / count != size)
-// 		return (NULL);
-// 	pointer = malloc(total_size);
-// 	if (!pointer)
-// 	{
-// 		free(pointer);
-// 		return (NULL);
-// 	}
-// 	ft_memset(pointer, 0, total_size);
-// 	return (pointer);
-// }
-
-// void	*ft_memset(void *b, int c, size_t len)
-// {
-// 	char	*str;
-
-// 	str = b;
-// 	while (len-- > 0)
-// 	{
-// 		*str++ = (char)c;
-// 	}
-// 	return (b);
-// }
 
 void	*ft_calloc(size_t count, size_t size)
 {

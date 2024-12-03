@@ -6,7 +6,7 @@
 /*   By: cdawai <cdawai@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:31:42 by cdawai            #+#    #+#             */
-/*   Updated: 2024/11/25 22:20:05 by cdawai           ###   ########.fr       */
+/*   Updated: 2024/12/03 16:13:24 by cdawai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,28 @@ char	*get_next_line(int fd)
 
 char	*read_file(int fd, char *buf)
 {
-	char	*buffer;
-	int		byte_read;
+	char	*temp;
+	ssize_t	byte_read;
 
 	if (!buf)
 		buf = ft_calloc(1, 1);
-	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	temp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	byte_read = 1;
 	while (byte_read > 0)
 	{
-		byte_read = read(fd, buffer, BUFFER_SIZE);
+		byte_read = read(fd, temp, BUFFER_SIZE);
 		if (byte_read == -1)
 		{
-			free(buffer);
+			free(buf);
+			free(temp);
 			return (NULL);
 		}
-		buffer[byte_read] = 0;
-		buf = ft_free(buf, buffer);
-		if (ft_strchr(buffer, '\n'))
+		temp[byte_read] = 0;
+		buf = ft_free(buf, temp);
+		if (ft_strchr(temp, '\n'))
 			break ;
 	}
-	free(buffer);
+	free(temp);
 	return (buf);
 }
 
@@ -107,30 +108,22 @@ char	*ft_free(char *buffer, char *buf)
 	return (temp);
 }
 
-// int main(int argc, char **argv)
+// #include <fcntl.h>
+// #include <stdio.h>
+
+// int    main(void)
 // {
-//     if (argc != 2)
+//     int fd = open("test", O_RDONLY);
+//     if (fd == -1)
+//         return (1);
+
+//     char *result;
+//     while ((result = get_next_line(fd)) != NULL) 
+// 	// Continue until get_next_line returns NULL
 //     {
-//         fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
-//         return 1;
+//         printf("%s", result);
+//         free(result); // Free the memory allocated for the line
 //     }
-
-//     FILE *file = fopen(argv[1], "r");
-//     if (!file)
-//     {
-//         perror("Error opening file");
-//         return 1;
-//     }
-
-//     int fd = fileno(file); // Get the file descriptor from the FILE pointer
-//     char *line;
-
-//     while ((line = get_next_line(fd)) != NULL)
-//     {
-//         printf("%s", line);
-//         free(line); // Free the memory allocated for the line
-//     }
-
-//     fclose(file); // Close the file
-//     return 0;
+//     close(fd);
+//     return(0);
 // }
