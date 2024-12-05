@@ -6,7 +6,7 @@
 /*   By: cdawai <cdawai@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:31:42 by cdawai            #+#    #+#             */
-/*   Updated: 2024/12/03 16:13:24 by cdawai           ###   ########.fr       */
+/*   Updated: 2024/12/05 17:49:23 by cdawai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*get_next_line(int fd)
 	static char	*buffer;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = read_file(fd, buffer);
 	if (!buffer)
@@ -99,13 +99,13 @@ char	*ft_next(char *buffer)
 	return (line);
 }
 
-char	*ft_free(char *buffer, char *buf)
+char	*ft_free(char *buf, char *temp)
 {
-	char	*temp;
+	char	*newstr;
 
-	temp = ft_strjoin(buffer, buf);
-	free(buffer);
-	return (temp);
+	newstr = ft_strjoin(buf, temp);
+	free(buf);
+	return (newstr);
 }
 
 // #include <fcntl.h>
